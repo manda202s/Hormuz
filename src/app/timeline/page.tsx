@@ -58,12 +58,18 @@ export default function TimelinePage() {
           </h1>
         </div>
         <p className="text-text-secondary max-w-2xl">
-          Chronological record of key events in the Strait of Hormuz crisis.
-          {" "}
+          Chronological record of key events in the Strait of Hormuz crisis,
+          spanning 2023 to present.{" "}
           <span className="font-mono text-accent">
             {timelineEvents.length}
           </span>{" "}
-          events documented.
+          verified events documented from major news agencies.
+        </p>
+        <p className="text-xs text-text-muted mt-2 max-w-2xl">
+          Sources include Reuters, Associated Press, BBC, Al Jazeera, Bloomberg,
+          UN News, and other verified outlets. Click the{" "}
+          <span className="text-accent">↗</span> icon on each event to view the
+          original source.
         </p>
       </motion.div>
 
