@@ -94,6 +94,7 @@ export default function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
+      <h1 className="sr-only">Strait of Hormuz Crisis Dashboard</h1>
       {/* Status Banner */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}

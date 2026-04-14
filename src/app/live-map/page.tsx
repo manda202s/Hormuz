@@ -85,6 +85,7 @@ export default function LiveMapPage() {
 
   return (
     <div className="relative" style={{ height: "calc(100vh - 64px)" }}>
+      <h1 className="sr-only">Live Ship Tracking Map — Strait of Hormuz</h1>
       {/* Full-screen map */}
       <LiveMap
         ships={filteredShips}
