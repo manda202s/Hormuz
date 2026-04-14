@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Strait of Hormuz Live Monitor
 
-## Getting Started
+Real-time monitoring dashboard for the Strait of Hormuz shipping crisis with live ship tracking, oil price charts, news automation, and global impact analysis.
 
-First, run the development server:
+## 🚀 Features
+
+- **Live Ship Map** — Interactive Leaflet map with 40+ vessel markers, dark CARTO tiles, route overlays
+- **Dashboard** — Ship transit metrics, oil price charts, insurance trends, trade disruption stats
+- **Countries Impact** — Sortable table of 15+ countries with dependency data and detailed profiles
+- **Crisis Timeline** — 25 documented events with category filters, search, and JSON export
+- **News Feed** — Auto-aggregated from Reuters & Bloomberg RSS (60s refresh)
+- **About** — Data sources, methodology, disclaimer
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router, TypeScript)
+- **Styling:** Tailwind CSS v4
+- **Maps:** React Leaflet + CartoDB Dark tiles
+- **Charts:** Recharts 3
+- **Animation:** Framer Motion
+- **Data:** TanStack Query v5 (auto-refetch, caching)
+- **Caching:** Upstash Redis (with in-memory fallback)
+- **Icons:** Lucide React
+
+## 📦 Setup
 
 ```bash
+# Clone and install
+cd hormuz
+npm install
+
+# Copy env template
+cp .env.example .env.local
+# Edit .env.local with your API keys (optional - mock data works without keys)
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔑 Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `MARINETRAFFIC_API_KEY` | No | Ship tracking data (falls back to mock) |
+| `ALPHA_VANTAGE_API_KEY` | No | Oil prices (falls back to mock) |
+| `UPSTASH_REDIS_REST_URL` | No | Redis caching (falls back to in-memory) |
+| `UPSTASH_REDIS_REST_TOKEN` | No | Redis auth token |
+| `NEXT_PUBLIC_BASE_URL` | No | Canonical URL for SEO |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```
+src/
+├── app/
+│   ├── page.tsx              # Homepage (hero map + metrics)
+│   ├── live-map/page.tsx     # Full-screen ship tracking
+│   ├── dashboard/page.tsx    # Detailed metrics & charts
+│   ├── countries-impact/     # Country dependency analysis
+│   ├── timeline/page.tsx     # Crisis event timeline
+│   ├── news/page.tsx         # Auto-updated news feed
+│   ├── about/page.tsx        # About & methodology
+│   ├── api/                  # API routes (ships, oil, news, metrics)
+│   ├── sitemap.ts            # Dynamic XML sitemap
+│   └── robots.ts             # Robots.txt
+├── components/
+│   ├── Navigation.tsx        # Sticky nav with status badge
+│   ├── Footer.tsx
+│   ├── maps/LiveMap.tsx      # React Leaflet map
+│   ├── dashboard/            # MetricCard, LiveChart, StatusIndicator
+│   ├── news/NewsCard.tsx
+│   └── timeline/EventCard.tsx
+└── lib/
+    ├── api/                  # Data clients with mock fallbacks
+    ├── constants/            # Countries, routes, timeline data
+    └── utils/                # Redis, formatters, cn
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🚢 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Build for production
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Deploy to Vercel
+vercel --prod
+```
 
-## Deploy on Vercel
+Vercel cron jobs configured in `vercel.json`:
+- Ship data: Every 5 minutes
+- News: Every 15 minutes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📊 Data Sources
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Ship positions:** MarineTraffic API (AIS data)
+- **Oil prices:** Alpha Vantage
+- **News:** Reuters & Bloomberg RSS feeds
+- **Country data:** IEA / EIA statistics
+- **Timeline:** Manually curated events
+
+## 📝 License
+
+For informational purposes only. Not financial advice.
